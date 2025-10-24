@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pesquisa Diagnóstico — Produto e Marketing</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">MJ</div>
+      <div class="header-text">
+        <h1>Pesquisa Rápida — Diagnóstico do Negócio</h1>
+        <div class="lead">Responda cada item com uma nota de 0 a 9. O relatório automático será gerado em PDF.</div>
+      </div>
+    </header>
+
+    <main class="form-card">
+      <div class="block intro">
+        <h2>Abertura</h2>
+        <div style="margin-top:8px;">
+          <label style="display:block;font-weight:700;margin-bottom:6px;">Nome</label>
+          <input id="user-name" type="text" autocomplete="name" placeholder="Seu nome" />
+        </div>
+      </div>
+
+      <div class="block-box">
+        <div class="block-box-header"><h3>O QUE — Produto ou Serviço</h3></div>
+
+        <div id="q-1" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 1 — O quanto você sabe sobre os benefícios que seu produto ou serviço entrega ao cliente?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Saber os benefícios mostra o que o cliente ganha; ex.: sabonete hidrata, marmita economiza tempo. <strong>Como isso ajuda:</strong> Melhora descrições de venda, anúncios e criação de ofertas.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 1" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-2" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 2 — O quanto você conhece os diferenciais do seu produto ou serviço frente aos concorrentes?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Diferenciais explicam por que escolher você; ex.: peça artesanal, atendimento a domicílio. <strong>Como isso ajuda:</strong> Justifica preço, torna anúncios mais atraentes e facilita parcerias.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 2" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-3" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 3 — O quanto você entende o problema ou necessidade que seu produto ou serviço resolve?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Saber a dor permite falar com quem precisa; ex.: roupas sob medida evitam desconforto. <strong>Como isso ajuda:</strong> Cria mensagens mais eficazes e orienta melhorias do produto.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 3" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-box">
+        <div class="block-box-header"><h3>PRA QUEM — Persona e Público-Alvo</h3></div>
+
+        <div id="q-4" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 4 — O quanto você conhece o perfil do seu cliente ideal (idade, interesses, hábitos)?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Evita esforço com público errado; ex.: bijuteria juvenil atrai jovens. <strong>Como isso ajuda:</strong> Escolhe fotos, linguagem e canais corretos.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 4" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-5" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 5 — O quanto você sabe onde seu cliente costuma estar (redes sociais, feiras, lojas)?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Encontrar o cliente é montar a barraca no lugar certo. <strong>Como isso ajuda:</strong> Foca investimento e define canais de venda.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 5" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-6" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 6 — O quanto você conhece os desejos e dores do seu público?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Conhecer desejos permite ofertas que tocam emoções. <strong>Como isso ajuda:</strong> Cria produtos e campanhas que vendem mais.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 6" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-7" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 7 — O quanto seu produto cria conexão emocional com o cliente?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Conexão vira recomendação; ex.: presente com história. <strong>Como isso ajuda:</strong> Aumenta fidelidade e permite cobrar mais.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 7" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-8" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 8 — Você já validou seu público com vendas, conversas ou testes?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Testar evita suposições; ex.: achar que vende para turistas e descobrir público local. <strong>Como isso ajuda:</strong> Ajusta preço, produto e canais com base em dados.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 8" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-box">
+        <div class="block-box-header"><h3>POR QUE — Propósito e Motivação</h3></div>
+
+        <div id="q-9" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 9 — O quanto você entende por que escolheu esse produto ou serviço para empreender?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> O “porquê” sustenta a persistência; ex.: hobby que virou renda. <strong>Como isso ajuda:</strong> Mantém foco e ajuda a contar sua história.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 9" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-10" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 10 — O quanto você sabe o propósito do seu negócio (o que quer transformar)?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Propósito guia decisões além do lucro. <strong>Como isso ajuda:</strong> Atrai clientes e parceiros alinhados.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 10" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-11" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 11 — O quanto você se sente motivado para trabalhar nesse negócio hoje?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Motivação impacta consistência; ex.: postar com regularidade. <strong>Como isso ajuda:</strong> Identifica necessidade de pausa, apoio ou capacitação.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 11" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-box">
+        <div class="block-box-header"><h3>COMO — Produção, Entrega e Atendimento</h3></div>
+
+        <div id="q-12" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 12 — O quanto você domina o processo de produção ou execução do seu produto/serviço?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Domínio garante qualidade e previsibilidade. <strong>Como isso ajuda:</strong> Facilita padronizar e escalar com qualidade.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 12" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-13" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 13 — O quanto você controla o custo de produção e sabe quanto precisa para obter lucro?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Sem controle, há risco de prejuízo. <strong>Como isso ajuda:</strong> Define preço justo e planejamento financeiro.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 13" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-14" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 14 — O quanto sua logística de entrega e embalagem é eficiente e confiável?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Boa embalagem protege produto e reputação. <strong>Como isso ajuda:</strong> Reduz devoluções e amplia vendas fora da cidade.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 14" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-15" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 15 — O quanto você oferece atendimento claro e positivo ao cliente antes e depois da venda?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Atendimento influencia a compra e a fidelização. <strong>Como isso ajuda:</strong> Gera avaliações, indicações e vendas complementares.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 15" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-box">
+        <div class="block-box-header"><h3>VALOR, PREÇO E DIVULGAÇÃO</h3></div>
+
+        <div id="q-16" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 16 — O quanto você entende como precificar seu produto ou serviço de forma justa e competitiva?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Preço certo cobre custos e atrai clientes. <strong>Como isso ajuda:</strong> Planeja faturamento e promoções sem prejuízo.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 16" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-17" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 17 — O quanto você sabe comunicar o valor do seu produto em posts, anúncios ou vendas?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Comunicar valor converte interesse em compra. <strong>Como isso ajuda:</strong> Torna legendas e anúncios mais persuasivos.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 17" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-18" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 18 — O quanto você já usa estratégias de divulgação (posts, parcerias, feiras, marketplaces)?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Estratégias certas trazem clientes. <strong>Como isso ajuda:</strong> Ajuda a planejar calendário e medir canais que funcionam.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 18" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="q-19" class="q-row">
+          <div class="q-top">
+            <div class="q-left">
+              <div class="q-title">Pergunta 19 — O quanto você entende sobre fidelização de clientes (como fazer o cliente voltar)?</div>
+              <div class="q-explain"><strong>Por que é importante:</strong> Cliente fiel vende mais com menos custo; ex.: cupom para próxima compra. <strong>Como isso ajuda:</strong> Aumenta receita recorrente e indicações.</div>
+            </div>
+            <div class="q-right">
+              <div class="range-wrap">
+                <input class="range-control" type="range" min="0" max="9" step="1" value="0" aria-label="Pergunta 19" />
+                <div class="range-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                </div>
+                <div class="range-value" aria-live="polite">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+   <!-- fim do conteúdo principal (main): mantemos apenas o espaço de status/progresso -->
+<div class="form-actions">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <!-- espaço reservado para progress / status / download link -->
+    <div id="pdf-status" style="min-width:220px;display:flex;flex-direction:column;gap:6px;">
+  <div id="download-progress" style="height:8px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;display:none;">
+    <div id="download-progress-bar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));"></div>
+  </div>
+  <div id="download-message" style="font-size:13px;color:var(--muted);"></div>
+</div>
+</div> <!-- fecha bloco pai interno (ex: .form-actions) -->
+</main>
+
+
+<!-- aside lateral com botões (um único conjunto, sem duplicatas) -->
+<aside class="result-card">
+  <div class="score-row">
+    <div id="score-box" class="score poor">0</div>
+    <div style="flex:1">
+      <div class="tier" id="tier-text">Diagnóstico</div>
+      <div class="summary" id="summary-text">Total de pontos: 0 / 171 — Percentual: 0%</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="pdf-btn" class="btn primary btn-lg">Salvar PDF</button>
+    <button id="reset-btn" class="btn ghost btn-lg">Resetar</button>
+  </div>
+  <!-- Componente de progresso fixo -->
+<div class="progress-container" id="pdf-progress-container" aria-hidden="true">
+  <div class="progress-shell">
+    <div class="progress-bar" id="pdf-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
+  <span class="progress-num" id="pdf-progress-num">0%</span>
+</div>
+
+</aside>
+
+</div> <!-- fecha container principal pai (ex: .layout / .container) -->
+
+  <script src="guidance-texts.js"></script>
+  <script src="printReport.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

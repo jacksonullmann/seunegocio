@@ -1,0 +1,11 @@
+{
+  "name": "teste-insta",
+  "version": "1.0.0",
+  "main": "api/gerar-pdf.js",
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "dependencies": {
+    "puppeteer-core": "^20.0.0",
+    "@sparticuz/chromium": "^138.0.2"
+  }
+}

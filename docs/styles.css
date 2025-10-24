@@ -1,0 +1,480 @@
+:root{
+  --bg-1:#0f1724; --bg-2:#071029;
+  --muted:#93a3b8; --text:#e6eef8;
+  --accent:#3fb0ff; --accent-2:#7c4dff;
+  --intro-bg:linear-gradient(180deg, rgba(63,176,255,0.08), rgba(124,77,255,0.04));
+  --card-bg:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --block-header-bg:linear-gradient(90deg, rgba(63,176,255,0.12), rgba(124,77,255,0.06));
+  --radius:12px; --max-width:1150px; font-family:Inter, system-ui, Arial; font-size:19px; color:var(--text);
+}
+
+/* base layout */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body {
+  background-color: #071029;
+  color: #e6eef8;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display:flex;align-items:flex-start;justify-content:center;padding:28px 10px;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+
+/* container layout: main + aside */
+.container{width:100%;max-width:var(--max-width);display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start}
+
+/* header with brand */
+.header{grid-column:1 / -1;display:flex;align-items:center;gap:14px;margin-bottom:8px;position:relative;z-index:6}
+.brand{
+  width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 8px 22px rgba(63,176,255,0.08);
+  flex:0 0 64px;
+}
+
+/* header text */
+.header-text h1{margin:4px 9px 0 9px;font-size:1.8rem}
+.lead{margin:4px 9px 0 9px;color:var(--muted);font-size:1.1rem}
+
+/* main card */
+.form-card{background:var(--card-bg);border-radius:var(--radius);padding:0px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.45)}
+.block{margin-bottom:12px}
+.block.intro{background:var(--intro-bg);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.block.intro h2{margin:0;color:#eaf6ff}
+
+/* boxed blocks of questions */
+.block-box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:12px}
+.block-box-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:8px;border-radius:8px;background:var(--block-header-bg)}
+.block-box-header h3{margin:0;color:#0092ff;font-size:1.1rem}
+.block-box .label-muted{color:var(--muted);font-weight:600;font-size:0.9rem}
+
+/* question row */
+.q-row{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);margin-bottom:10px}
+.q-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.q-left{flex:1;min-width:0}
+.q-title{font-weight:700;margin:0 0 6px}
+.q-explain{color:var(--muted);font-size:0.92rem;line-height:1.28;word-break:break-word}
+
+/* slider styling */
+input[type="range"]{
+  -webkit-appearance:none;
+  width:220px;
+  height:8px;
+  background:#e9f0ff;
+  border-radius:999px;
+  outline:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 6px 18px rgba(11,102,255,0.18);
+  border:3px solid #fff;margin-top:-5px;
+}
+
+/* hint button */
+.hint-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);width:36px;height:36px;border-radius:8px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size: 18px}
+.hint-btn:hover{border-color:rgba(63,176,255,0.12);color:var(--text)}
+.hint-btn:focus{outline:3px solid rgba(124,77,255,0.12);outline-offset:2px}
+
+/* options under question */
+.options-row{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.opt{padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);cursor:pointer;font-weight:700}
+.opt.selected{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051126;border:none;box-shadow:0 8px 20px rgba(63,176,255,0.07)}
+.opt:focus{outline:3px solid rgba(124,77,255,0.12);outline-offset:2px;border-radius:10px}
+
+/* tooltip style */
+.hint-tooltip{position:fixed;z-index:9999;padding:10px 12px;background:#071427;border:1px solid rgba(255,255,255,0.04);color:#e6eef8;border-radius:8px;box-shadow:0 10px 30px rgba(2,6,23,0.6);max-width:320px}
+
+/* result card */
+.result-card{background:var(--card-bg);border-radius:var(--radius);padding:10px;border:1px solid rgba(255,255,255,0.04);position:sticky;top:28px;box-shadow:0 8px 30px rgba(2,6,23,0.45)}
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.score{width:68px;height:68px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));border:1px solid rgba(255,255,255,0.03)}
+.score.good{background:linear-gradient(180deg, rgba(34,197,94,0.12), rgba(34,197,94,0.05));color:#16a34a}
+.score.mid{background:linear-gradient(180deg, rgba(250,204,21,0.12), rgba(250,204,21,0.04));color:#b45309}
+.score.poor{background:linear-gradient(180deg, rgba(239,68,68,0.12), rgba(239,68,68,0.04));color:#dc2626}
+.tier{font-weight:700;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);display:inline-block;color:var(--muted)}
+.summary{color:var(--muted);margin-top:6px;font-size:0.92rem}
+
+/* actions */
+.actions{display:flex;gap:10px;margin-top:20px;padding-left: 10px;padding-right: 10px}
+.btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700;background:rgba(255,255,255,0.03);color:var(--text)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051126}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn:focus{outline:3px solid rgba(124,77,255,0.12);outline-offset:2px}
+
+/* helper classes used by the JS */
+.q-row:focus-within{outline:3px solid rgba(63,176,255,0.04);outline-offset:2px}
+
+/* small screens adjustments */
+@media (max-width : 343px ){
+  .container{grid-template-columns:1fr; padding:0;}
+  .header{flex-direction:row;align-items:center}
+  .brand{width:56px;height:56px;border-radius:10px;flex:0 0 56px}
+  .form-card{margin-top:0}
+  .result-card{position:relative;top:0}
+  .block-box{padding:10px}
+}
+
+/* print adjustments */
+@media print{
+  body{background:#fff;color:#000}
+  .container{max-width:900px;padding:0}
+  .brand{display:none}
+  .result-card{position:static;box-shadow:none;border:1px solid #eee}
+}
+
+/* --- Mobile responsiveness improvements --- */
+
+/* Empilha main + aside em telas menores e reduz largura da sidebar antes de 760px */
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: 1fr; /* empilha */
+    gap: 14px;
+    padding: 18px 8px;
+  }
+
+  /* coloca header, main e aside na ordem natural (header ocupa 100%) */
+  .header { flex-wrap: wrap; gap:10px; align-items:center; }
+  .brand { width:52px; height:52px; flex:0 0 52px; border-radius:10px; }
+
+  /* main card: largura completa e padding reduzido */
+  .form-card {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  /* result-card vira bloco abaixo do main, largura 100% e sem sticky */
+  .result-card {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  /* boxes ficam com padding menor e espaçamento reduzido */
+  .block-box { padding: 10px; margin-bottom: 10px; }
+  .q-row { padding: 10px; }
+}
+
+/* Toque/legibilidade em telas pequenas: aumenta hit-area dos botões de opção e espaçamento */
+@media (max-width: 640px) {
+  .opt {
+    padding: 12px 14px;
+    font-size: 16px;
+    min-width: 88px;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .options-row {
+    gap: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+  .options-row::-webkit-scrollbar { display: none; }
+
+  /* ajusta coluna direita (controles) para caber melhor */
+  .q-top { flex-direction: column; gap:8px; align-items:stretch; }
+  .q-top .q-left { order: 0; }
+  .q-top > div:last-child { align-self:flex-start; width:100%;}
+  input[type="range"] { width: 100% !important; max-width:100%; }
+}
+
+/* Garante que o header-text não quebre a grid em telas médias */
+@media (max-width: 1150px) {
+  .container { padding-left: 12px; padding-right: 12px; }
+  .header-text h1 { font-size: 1.4rem; }
+  .lead { font-size: 1rem; }
+}
+
+/* Melhora a responsividade da grid interna dos itens recomendados */
+@media (max-width: 520px) {
+  .reco-item { grid-template-columns: 36px 1fr; gap:8px; align-items:center; }
+  .icon-wrap { width:36px; height:36px; }
+  .title { font-size: 14px; }
+  .suggestion, .explain { font-size: 13px; }
+}
+
+/* Evita que caixas fixas (ex.: sidebar) fiquem maiores que a viewport */
+.form-card, .result-card, .block-box { max-width: 100%; box-sizing: border-box; }
+
+/* Força quebra de texto mais cedo para evitar overflow */
+.q-title, .q-explain, .suggestion, .explain { word-break: break-word; overflow-wrap: break-word; }
+
+/* Pequeno ajuste visual: reduz sombra e margem em mobile para caber melhor o conteúdo na tela */
+@media (max-width: 760px) {
+  .form-card { box-shadow: 0 6px 18px rgba(2,6,23,0.28); }
+  .result-card { box-shadow: 0 6px 18px rgba(2,6,23,0.28); padding:8px; }
+}
+
+.range-control { width:100%; max-width:320px; }
+@media (max-width:640px){ .range-control { max-width:100%; } }
+
+/* Move o controle range para baixo do texto e dá mais espaço visual */
+.q-top {
+  display: flex;
+  flex-direction: column; /* força o input abaixo do texto */
+  gap: 12px;
+  align-items: stretch;
+}
+
+.q-top .q-left {
+  margin-bottom: 0; /* já usamos gap entre os blocos */
+}
+
+/* Envolve controle do lado direito para ficar com largura total e padding visual */
+.q-top > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* Range responsivo e com espaço para toque */
+.range-control,
+.q-top .range-value,
+.q-top .range-labels {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.range-control {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  height: 10px; /* um pouco maior para toque */
+}
+
+/* labels do range ficam com padding lateral e cor mais suave */
+.q-top .range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 6px 4px 0 4px;
+}
+
+/* valor do range deslocado, mais espaçado e legível */
+.range-value {
+  margin-top: 6px;
+  font-weight: 800;
+  color: var(--accent-2);
+}
+
+/* Mobile específico: aumenta gap e padding para toque confortável */
+@media (max-width: 640px) {
+  .q-top { gap: 14px; }
+  .q-row { padding: 14px; }
+  .range-control { height: 12px; }
+  .range-value { font-size: 15px; }
+  .q-top > div:last-child { padding-left: 4px; padding-right: 4px; }
+  .options-row { margin-top: 10px; }
+}
+/* range: 90% de largura e centralizado; valor alinhado ao final da barra */
+.range-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center; /* centraliza a barra */
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* o container visual da barra (centra a track e dá 90% de largura) */
+.range-track-row {
+  width: 90%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* slider */
+.range-control {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+  border-radius: 999px;
+  outline: none;
+}
+
+/* thumb styling */
+.range-control::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width: 18px;height:18px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;margin-top:-4px;
+  box-shadow:0 6px 18px rgba(11,102,255,0.18);
+}
+.range-control::-moz-range-thumb{
+  width: 18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid #fff;
+}
+
+/* small ticks under track */
+.range-track-marks {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: -6px; /* aproxima dos ticks */
+  pointer-events: none;
+}
+
+/* numeric labels 0..4 alinhados */
+.range-labels {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  font-size: 13px;
+  color: var(--muted);
+  padding: 0 2px;
+  user-select: none;
+}
+
+/* posiciona o box do valor no final da track-row */
+.range-value {
+  position: absolute;
+  right: -4px; /* pequenos ajustes para centralizar sobre a borda direita */
+  top: -28px;  /* sobe para ficar acima da thumb final; ajustável */
+  font-weight: 800;
+  color: var(--accent-2);
+  font-size: 13px;
+  background: rgba(0,0,0,0.12);
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+  pointer-events: none;
+  transform: translateY(-2px);
+  white-space: nowrap;
+}
+
+/* quando houver pouca largura, encaixa o value abaixo da barra para não cortar */
+@media (max-width:420px){
+  .range-value { position: relative; right: 0; top: 0; transform:none; margin-top:6px; }
+  .range-track-row, .range-track-marks, .range-labels { width: 100%; }
+}
+
+/* destaque do label ativo (JS) */
+.range-labels span.active { color: var(--accent-2); font-weight: 800; }
+
+/* responsividade: aumenta hit area */
+@media (max-width:640px){
+  .range-control { height: 12px; }
+  .range-control::-webkit-slider-thumb { width:22px;height:22px;margin-top:-6px; }
+  .range-labels { font-size: 14px; }
+  .range-value { font-size: 14px; padding:5px 10px; }
+}
+
+/* Tamanhos utilitários */
+.btn-lg {
+  font-size: 1.125rem;       /* ~18px */
+  padding: 0.7rem 2.4rem;    /* vertical horizontal */
+  border-radius: 8px;
+  line-height: 1;
+  min-width: 120px;          /* touch target mínimo */
+  min-height: 44px;          /* recomendado para touch */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Aparência do botão primário (ajuste suave aos existentes) */
+.btn.primary,
+.btn.primary.btn-lg {
+  background-color: #0078d4;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(3, 57, 108, 0.12);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s;
+}
+
+/* Hover / active / focus */
+.btn.primary.btn-lg:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3,57,108,0.14); }
+.btn.primary.btn-lg:active { transform: translateY(0); box-shadow: 0 3px 8px rgba(3,57,108,0.12); }
+.btn.primary.btn-lg:focus { outline: 3px solid rgba(0,120,212,0.18); outline-offset: 2px; }
+
+/* Variantes responsivas */
+@media (max-width: 480px) {
+  .btn-lg { font-size: 1rem; padding: 0.7rem 2rem; min-width: 100px; }
+}
+@media (min-width: 1200px) {
+  .btn-lg { font-size: 1.25rem; padding: 1rem 1.6rem; min-width: 140px; }
+}
+
+/* Contêiner (por padrão oculto até o clique) */
+#pdf-progress-container,
+.progress-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  background: transparent;
+  position: relative;
+  z-index: 9999;
+  visibility: hidden;   /* oculto por padrão */
+  opacity: 0;
+  transition: opacity 200ms ease, visibility 200ms;
+}
+
+/* quando precisa ser visível, a classe .visible é aplicada pelo JS */
+#pdf-progress-container.visible,
+.progress-container.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Shell com formato pill */
+#pdf-progress-container .progress-shell,
+.progress-shell {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  height: 12px;
+  background: #eee;
+  border-radius: 999px;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Barra interna arredondada */
+#pdf-progress-container .progress-bar,
+.progress-bar {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,#3fa5ff,#7ac0ff 60%);
+  border-radius: 999px;
+  transition: width .32s ease;
+  transform-origin: left center;
+}
+
+/* Número opcional à direita */
+#pdf-progress-container .progress-num,
+.progress-num {
+  flex: 0 0 auto;
+  min-width: 44px;
+  text-align: right;
+  font-size: 13px;
+  color: #0092ff;
+  line-height: 1;
+}
+
+/* mobile adjustments */
+@media (max-width: 480px) {
+  
+  #pdf-progress-container .progress-shell,
+  .progress-shell { height: 8px; }
+}

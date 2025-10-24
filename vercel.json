@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/gerar-pdf.js": {
+         "maxDuration": 30
+    }
+  }
+}
