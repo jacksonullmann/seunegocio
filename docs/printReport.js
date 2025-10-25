@@ -228,14 +228,21 @@ global.PrintReport.extrairHtmlParaEnvio = extrairHtmlParaEnvio;
 // Bloco adicional com respostas por pergunta
 function renderAnswersBlock() {
   const answers = window.getUserAnswers ? window.getUserAnswers() : [];
-  if (!answers.length) return '<p>Nenhuma resposta encontrada.</p>';
+  if (!answers || !answers.length) return ''; // retorna vazio em vez de parágrafo
 
-  const html = answers.map(a => {
+  const valid = answers.map(a => ({ id: a && a.id, score: (typeof a.score === 'number') ? a.score : Number(a && a.score) || 0 }))
+                       .filter(a => a.id && String(a.id).trim());
+
+  if (!valid.length) return '';
+
+  const html = valid.map(a => {
     const row = document.getElementById(a.id);
-    const label = row?.querySelector('.q-text')?.textContent?.trim() || a.id;
+    const rawLabel = row?.querySelector?.('.q-text')?.textContent?.trim() || String(a.id);
+    const label = escapeHtml(rawLabel || '');
+    const score = escapeHtml(String(a.score));
     return `<div class="report-row" style="margin-bottom:8px;">
       <div><strong>${label}</strong></div>
-      <div>Nota: <span style="font-weight:bold;color:#21693a;">${a.score}</span></div>
+      <div>Nota: <span style="font-weight:bold;color:#21693a;">${score}</span></div>
     </div>`;
   }).join('');
 
@@ -244,3 +251,4 @@ function renderAnswersBlock() {
     ${html}
   </section>`;
 }
+

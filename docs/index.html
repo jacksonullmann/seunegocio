@@ -18,10 +18,11 @@
 
     <main class="form-card">
       <div class="block intro">
-        <h2>Abertura</h2>
-        <div style="margin-top:8px;">
-          <label style="display:block;font-weight:700;margin-bottom:6px;">Nome</label>
-          <input id="user-name" type="text" autocomplete="name" placeholder="Seu nome" />
+               <div style="margin-top:8px;">
+<label for="user-name" style="display:block;font-weight:700;margin-bottom:12px;">Nome Completo</label>
+<input id="user-name" class="fullwidth-input" type="text" autocomplete="name" placeholder="Digite seu nome completo" required>
+
+
         </div>
       </div>
 
@@ -389,40 +390,50 @@
       </div>
 
    <!-- fim do conteúdo principal (main): mantemos apenas o espaço de status/progresso -->
+
+</main>
+
+
+<!-- aside lateral com botões (um único conjunto, sem duplicatas) -->
+<aside class="result-card" aria-labelledby="result-title">
+  <div id="result-title" class="tier">Resultado</div>
+
+  <div class="score-row">
+    <div class="score poor" id="score-box">0%</div>
+    <div style="flex:1">
+      <div class="summary"><strong>Total de pontos:</strong> <span id="total-score">0</span> / <span id="max-score">171</span></div>
+      <div class="summary"><strong>Percentual:</strong> <span id="percent-score">0</span>%</div>
+    </div>
+  </div>
+
+  <div id="interpretation" class="summary">
+    <!-- conteúdo injetado por renderInterpretation -->
+  </div>
+
+  
+
+  <div class="actions">
+       <button id="pdf-btn" type="button" class="btn primary btn-lg" aria-label="Salvar PDF">Salvar PDF</button>
+    <button id="reset-btn" type="button" class="btn ghost btn-lg" aria-label="Resetar">Resetar</button>
+  </div>
+  <!-- Componente de progresso fixo -->
+<div class="progress-container" id="pdf-progress-container">
+ <div class="progress-shell">
+      <div class="progress-bar" id="pdf-progress-bar"></div></div>
+  <span class="progress-num" id="pdf-progress-num">0%</span>
+</div>
+
 <div class="form-actions">
   <div style="display:flex;align-items:center;gap:10px;">
     <!-- espaço reservado para progress / status / download link -->
-    <div id="pdf-status" style="min-width:220px;display:flex;flex-direction:column;gap:6px;">
-  <div id="download-progress" style="height:8px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;display:none;">
+    <div id="pdf-status" style="min-width:100%;display:flex;flex-direction:column;gap:6px;">
+    <div id="download-progress" style="height:8px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;display:none;">
     <div id="download-progress-bar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));"></div>
   </div>
   <div id="download-message" style="font-size:13px;color:var(--muted);"></div>
 </div>
 </div> <!-- fecha bloco pai interno (ex: .form-actions) -->
-</main>
 
-
-<!-- aside lateral com botões (um único conjunto, sem duplicatas) -->
-<aside class="result-card">
-  <div class="score-row">
-    <div id="score-box" class="score poor">0</div>
-    <div style="flex:1">
-      <div class="tier" id="tier-text">Diagnóstico</div>
-      <div class="summary" id="summary-text">Total de pontos: 0 / 171 — Percentual: 0%</div>
-    </div>
-  </div>
-
-  <div class="actions">
-    <button id="pdf-btn" class="btn primary btn-lg">Salvar PDF</button>
-    <button id="reset-btn" class="btn ghost btn-lg">Resetar</button>
-  </div>
-  <!-- Componente de progresso fixo -->
-<div class="progress-container" id="pdf-progress-container" aria-hidden="true">
-  <div class="progress-shell">
-    <div class="progress-bar" id="pdf-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-  </div>
-  <span class="progress-num" id="pdf-progress-num">0%</span>
-</div>
 
 </aside>
 

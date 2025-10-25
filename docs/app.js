@@ -19,31 +19,58 @@
   function qsa(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
 
   // UI helpers
-  function setProgressVisible(visible) {
-    const barWrap = qs('#download-progress');
-    if (!barWrap) return;
-    barWrap.style.display = visible ? 'block' : 'none';
-    if (!visible) {
-      const bar = qs('#download-progress-bar');
-      if (bar) bar.style.width = '0%';
-    }
-  }
-  function setProgress(percent) {
-    const bar = qs('#download-progress-bar');
-    if (!bar) return;
-    bar.style.width = Math.min(100, Math.max(0, percent)) + '%';
-  }
-  function setMessage(text) {
+  // utilitário curto para query selector (mantém seu padrão qs se usar)
+function qs(selector, root = document) {
+  return root.querySelector(selector);
+}
+
+/* controla visibilidade dos wrappers (NUNCA usa display:none) */
+function setProgressVisible(visible) {
+  const downloadWrap = qs('#download-progress');
+  const pdfWrap = qs('#pdf-progress-container');
+
+  if (downloadWrap) downloadWrap.classList.toggle('visible', !!visible);
+  if (pdfWrap) pdfWrap.classList.toggle('visible', !!visible);
+
+  if (!visible) {
+    const downloadBar = qs('#download-progress-bar');
+    if (downloadBar) downloadBar.style.width = '0%';
+    const pdfBar = qs('#pdf-progress-bar');
+    if (pdfBar) pdfBar.style.width = '0%';
     const msg = qs('#download-message');
-    if (!msg) return;
-    msg.textContent = text || '';
+    if (msg) msg.textContent = '';
   }
-  function setButtonLoading(btn, loadingText) {
-    if (!btn) return;
-    btn.disabled = !!loadingText;
-    if (loadingText) btn.dataset.orig = btn.textContent;
-    btn.textContent = loadingText || (btn.dataset.orig || btn.textContent);
+}
+
+/* atualiza largura das barras (sincroniza ambas) */
+function setProgress(percent) {
+  const value = Math.min(100, Math.max(0, Number(percent) || 0)) + '%';
+  const downloadBar = qs('#download-progress-bar');
+  const pdfBar = qs('#pdf-progress-bar');
+  if (downloadBar) downloadBar.style.width = value;
+  if (pdfBar) pdfBar.style.width = value;
+}
+
+/* atualiza mensagem de status */
+function setMessage(text) {
+  const msg = qs('#download-message');
+  if (!msg) return;
+  msg.textContent = text || '';
+}
+
+/* define estado de loading dos botões */
+function setButtonLoading(btn, loadingText) {
+  if (!btn) return;
+  btn.disabled = !!loadingText;
+  if (loadingText) {
+    if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
+    btn.textContent = loadingText;
+  } else {
+    btn.textContent = btn.dataset.orig || btn.textContent;
+    delete btn.dataset.orig;
   }
+}
+
 
   // Ranges
   function enhanceAllRanges() {
@@ -73,30 +100,156 @@
   }
 
   function calculateTotals() {
-    const answers = getUserAnswers();
-    const total = answers.reduce((s, a) => s + (Number(a.score) || 0), 0);
-    const max = answers.length * 9;
-    const percent = max ? Math.round((total / max) * 100) : 0;
+  const answers = getUserAnswers ? getUserAnswers() : [];
+  const total = answers.reduce((s, a) => s + (Number(a.score) || 0), 0);
+  const max = answers.length * 9;
+  const percent = max ? Math.round((total / max) * 100) : 0;
 
-    const scoreBox = qs('#score-box');
-    const tierText = qs('#tier-text');
-    const summaryText = qs('#summary-text');
+  // Principais elementos que já usou
+  const scoreBox = qs('#score-box');      // antiga versão: mostrava total ou percent
+  const tierText = qs('#tier-text');
+  const summaryText = qs('#summary-text');
 
-    if (scoreBox) {
-      scoreBox.textContent = total;
-      scoreBox.classList.remove('good', 'mid', 'poor');
-      if (percent >= 75) scoreBox.classList.add('good');
-      else if (percent >= 40) scoreBox.classList.add('mid');
-      else scoreBox.classList.add('poor');
-    }
-    if (tierText) {
-      const tier = percent >= 75 ? 'Ótimo' : percent >= 40 ? 'Intermediário' : 'Precisa melhorar';
-      tierText.textContent = tier;
-    }
-    if (summaryText) {
-      summaryText.textContent = `Total de pontos: ${total} / ${max} — Percentual: ${percent}%`;
-    }
+  // IDs do card de relatório/padrão PDF que você também usa
+  const totalEl = document.getElementById('total-score');
+  const maxEl = document.getElementById('max-score');
+  const percentEl = document.getElementById('percent-score');
+  const scoreBadge = document.getElementById('score-box'); // pode ser same as scoreBox
+
+  // Atualiza os elementos antigos / alternativos
+  if (scoreBox) {
+    // deixar compatível: exibir total (como seu código antigo fazia)
+    scoreBox.textContent = String(total);
+    scoreBox.classList.remove('good','mid','poor');
+    if (percent >= 75) scoreBox.classList.add('good');
+    else if (percent >= 40) scoreBox.classList.add('mid');
+    else scoreBox.classList.add('poor');
   }
+
+  // Atualiza os elementos do relatório (total / max / percent)
+  if (totalEl) totalEl.textContent = String(total);
+  if (maxEl) maxEl.textContent = String(max);
+  if (percentEl) percentEl.textContent = String(percent);
+
+  // Se houver badge que deve mostrar % (algumas versões usam score-box para percent)
+  if (scoreBadge && scoreBadge.id === 'score-box' && percentEl) {
+    // se preferir exibir %, use:
+    // scoreBadge.textContent = percent + '%';
+    // Mas para compatibilidade com seu código original que mostrava total, mantemos total.
+    // Ajuste aqui se quiser percent no badge.
+  }
+
+  // Atualiza resumo textual redundante se existir
+  if (summaryText) summaryText.textContent = `Total de pontos: ${total} / ${max} — Percentual: ${percent}%`;
+  if (tierText) {
+    const tier = percent >= 75 ? 'Ótimo' : percent >= 40 ? 'Intermediário' : 'Precisa melhorar';
+    tierText.textContent = tier;
+  }
+
+  // atualiza interpretação no card (sua função)
+  if (typeof renderInterpretation === 'function') {
+    try { renderInterpretation(percent, total, max); } catch(e){ console.error(e); }
+  }
+
+  return { total, max, percent, answers };
+}
+
+
+//INSERIDO AGORA
+//INSERIDO AGORA
+//INSERIDO AGORA
+
+  // renderInterpretation: monta o conteúdo do bloco #interpretation com base em percent/total/max
+function renderInterpretation(percent, total, max) {
+  let header = '';
+  let actions = [];
+  let incentive = '';
+
+  if (percent >= 90) {
+    header = 'Excelente — sua produção visual está em nível de referência.';
+    actions = [
+      'Invista em conteúdo premium: editoriais, vídeos curtos e fotografia estilizada.',
+      'Documente playbooks e presets para replicar a qualidade em escala.',
+      'Monitore métricas por criativo e aloque orçamento para o que entrega maior ROAS.'
+    ];
+    incentive = 'Parabéns — mantenha a rotina de testes e transforme ganhos em vantagem competitiva.';
+  } else if (percent >= 80) {
+    header = 'Muito bom — imagens sólidas; foco em otimização contínua.';
+    actions = [
+      'Planeje experimentos de alto impacto (mini‑campanhas A/B de thumbnails e criativos).',
+      'Automatize presets e templates para reduzir variação entre peças.',
+      'Analise CTR e conversão por criativo para priorizar investimentos.'
+    ];
+    incentive = 'Você está perto da excelência — pequenas melhorias estrategicamente aplicadas trarão grandes resultados.';
+  } else if (percent >= 60) {
+    header = 'Bom — boa base, vale escalar e padronizar processos.';
+    actions = [
+      'Crie templates e presets para garantir consistência entre produtos e posts.',
+      'Reaproveite variações vencedoras em anúncios e publique testes controlados.',
+      'Invista em otimização técnica: compressão adequada e imagens com zoom de alta resolução.'
+    ];
+    incentive = 'Você tem tração — priorize processos e testes que ampliem resultados sem aumentar muito custo.';
+  } else if (percent >= 40) {
+    header = 'Regular — base existente, mas pontos importantes precisam atenção.';
+    actions = [
+      'Refaça imagens de maior prioridade: iluminação, ângulos e close‑ups que respondam dúvidas.',
+      'Otimize miniaturas e thumbnails; execute 1 teste A/B de thumbnail por produto.',
+      'Garanta que variações de cor/tamanho estejam fotografadas de forma padronizada.'
+    ];
+    incentive = 'Comece com 1 ou 2 mudanças por semana; ganhos rápidos em iluminação e thumbnails costumam melhorar conversão visível.';
+  } else if (percent >= 20) {
+    header = 'Em início de melhoria — há boas intenções, falta consistência.';
+    actions = [
+      'Escolha 3 produtos prioritários e refaça suas fotos (fundo neutro, modelo/uso, close).',
+      'Padronize tratamento de cor e crie uma checklist de publicação.',
+      'Valide com clientes quais detalhes mais influenciam a compra e direcione produção para esses pontos.'
+    ];
+    incentive = 'Pequenas iterações consistentes trazem resultados rápidos — foque em processos repetíveis.';
+  } else {
+    header = 'Precisa melhorar — reconstrução recomendada para ver impacto real.';
+    actions = [
+      'Revise iluminação e capture múltiplos ângulos (estúdio + lifestyle).',
+      'Inclua close‑ups com escala (medidas/modelo) e imagens que respondam dúvidas sem ler a descrição.',
+      'Padronize fundo, enquadramento e crie 1 sessão fotográfica por SKU prioritário.'
+    ];
+    incentive = 'Comece pelo básico: corrija 1 problema crítico esta semana e acompanhe a diferença na confiança do cliente.';
+  }
+
+  const actionsHtml = actions.map(a => `<li>${a}</li>`).join('');
+  const html = `
+    <div class="item">
+      <div class="item-header"><div class="item-title">Diagnóstico</div></div>
+      <div class="item-desc">${header}</div>
+    </div>
+
+    <div class="item">
+      <div class="item-header"><div class="item-title">Ações recomendadas</div></div>
+      <div class="item-desc"><ul>${actionsHtml}</ul></div>
+    </div>
+
+    <div class="item">
+      <div class="item-header"><div class="item-title">Incentivo</div></div>
+      <div class="item-desc"><em>${incentive}</em></div>
+    </div>
+  `;
+
+  const el = document.getElementById('interpretation');
+  if (el) el.innerHTML = html;
+
+  // opcional: atualiza textos resumidos do card se existirem
+  const tierText = document.getElementById('tier-text');
+  if (tierText) {
+    const tier = percent >= 75 ? 'Ótimo' : percent >= 40 ? 'Intermediário' : 'Precisa melhorar';
+    tierText.textContent = tier;
+  }
+  const summaryText = document.getElementById('summary-text');
+  if (summaryText) {
+    summaryText.textContent = `Total de pontos: ${total} / ${max} — Percentual: ${percent}%`;
+  }
+}
+//INSERIDO AGORA
+//INSERIDO AGORA
+//INSERIDO AGORA
 
   // Reset / draft
   function resetAll() {
@@ -215,7 +368,7 @@
   }
 
   const btn = qs('#pdf-btn');
-  setButtonLoading(btn, 'Gerando PDF...');
+  setButtonLoading(btn, 'Preparando...');
   setProgressVisible(true);
   setProgress(6);
   setMessage('Preparando envio...');
@@ -430,3 +583,4 @@
   };
 
 })();
+

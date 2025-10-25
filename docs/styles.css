@@ -33,9 +33,60 @@ body {
   flex:0 0 64px;
 }
 
+
+
 /* header text */
 .header-text h1{margin:4px 9px 0 9px;font-size:1.8rem}
 .lead{margin:4px 9px 0 9px;color:var(--muted);font-size:1.1rem}
+
+.fullwidth-label {
+  display: block;
+  font-family: "Inter", "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  font-weight: 700;
+  font-size: 13px;
+  color: #6b7280; /* rótulo levemente muted */
+  margin: 0 0 12px 0;
+  letter-spacing: 0.2px;
+}
+
+.fullwidth-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-family: "Inter", "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  font-size: 18px;
+  font-weight: 700;                /* texto do input em negrito */
+  color: #2b3236;                   /* cinza-escuro */
+  background: #ffffff;
+  border: 1px solid #e6edf5;
+  border-radius: 8px;
+  outline: none;
+  transition: box-shadow .18s ease, border-color .12s ease, background .12s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fullwidth-input:focus {
+  border-color: #8fbfff;
+  box-shadow: 0 8px 24px rgba(63,165,255,0.08);
+}
+
+.fullwidth-input::placeholder {
+  color: #9aa4ac;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.fullwidth-input[readonly] {
+  background: #fbfdff;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .fullwidth-input { font-size: 16px; padding: 10px 12px; border-radius: 6px; }
+  .fullwidth-label { font-size: 12px; margin-bottom: 8px; }
+}
+
 
 /* main card */
 .form-card{background:var(--card-bg);border-radius:var(--radius);padding:0px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.45)}
@@ -98,7 +149,7 @@ input[type="range"]::-webkit-slider-thumb{
 .summary{color:var(--muted);margin-top:6px;font-size:0.92rem}
 
 /* actions */
-.actions{display:flex;gap:10px;margin-top:20px;padding-left: 10px;padding-right: 10px}
+.actions{display:flex;gap:10px;margin-top:20px;padding-left: 10px;padding-right: 10px;padding-bottom: 15px}
 .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700;background:rgba(255,255,255,0.03);color:var(--text)}
 .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051126}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
@@ -410,36 +461,46 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 /* Contêiner (por padrão oculto até o clique) */
-#pdf-progress-container,
-.progress-container {
-  width: 100%;
-  max-width: 100%;
+/* overlay fixo: não adiciona espaço no fluxo */
+/* COMPORTAMENTO UNIFICADO PARA DESKTOP + MOBILE */
+/* === RESULT CARD: espaço sempre reservado para progresso === */
+.result-card {
+  position: relative;
+  padding-bottom: 56px; /* espaço reservado para a barra + gap; ajuste se precisar */
   box-sizing: border-box;
-  margin-top: 8px;
+}
+
+/* === BARRA PDF DENTRO DO CARD (fora do fluxo) === */
+.result-card #pdf-progress-container,
+.result-card .progress-container {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 12px;
+  height: 40px;
+  padding: 8px 12px;
+  box-sizing: border-box;
   background: transparent;
-  position: relative;
-  z-index: 9999;
-  visibility: hidden;   /* oculto por padrão */
+  pointer-events: none;
+  z-index: 20;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 200ms ease, visibility 200ms;
+  transition: opacity 180ms ease, visibility 180ms;
 }
 
-/* quando precisa ser visível, a classe .visible é aplicada pelo JS */
-#pdf-progress-container.visible,
-.progress-container.visible {
+/* mostra só com .visible */
+.result-card #pdf-progress-container.visible,
+.result-card .progress-container.visible {
   visibility: visible;
   opacity: 1;
 }
 
-/* Shell com formato pill */
-#pdf-progress-container .progress-shell,
-.progress-shell {
+/* internos da pdf progress */
+.result-card .progress-shell {
   flex: 1 1 auto;
-  width: 100%;
   min-width: 0;
   height: 12px;
   background: #eee;
@@ -448,11 +509,7 @@ input[type="range"]::-webkit-slider-thumb{
   box-sizing: border-box;
   margin: 0;
 }
-
-/* Barra interna arredondada */
-#pdf-progress-container .progress-bar,
-.progress-bar {
-  display: block;
+.result-card .progress-bar {
   width: 0%;
   height: 100%;
   background: linear-gradient(90deg,#3fa5ff,#7ac0ff 60%);
@@ -460,21 +517,106 @@ input[type="range"]::-webkit-slider-thumb{
   transition: width .32s ease;
   transform-origin: left center;
 }
-
-/* Número opcional à direita */
-#pdf-progress-container .progress-num,
-.progress-num {
+.result-card .progress-num {
   flex: 0 0 auto;
   min-width: 44px;
   text-align: right;
   font-size: 13px;
   color: #0092ff;
   line-height: 1;
+  pointer-events: auto;
 }
 
-/* mobile adjustments */
-@media (max-width: 480px) {
-  
-  #pdf-progress-container .progress-shell,
-  .progress-shell { height: 8px; }
+/* === WRAPPER DE DOWNLOAD (sempre reserva espaço; visível via .visible) === */
+#download-progress {
+  height: 8px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 999px;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: opacity .18s ease, visibility .18s;
+  opacity: 0;
+  visibility: hidden;
 }
+
+/* mostrar sem mexer no layout */
+#download-progress.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#download-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition: width .3s ease;
+}
+
+#download-message { font-size: 13px; color: var(--muted); }
+
+/* mobile adjustments (garante prioridade visual) */
+@media (max-width: 480px) {
+  .result-card { padding-bottom: 56px; }
+  .result-card #pdf-progress-container,
+  .result-card .progress-container {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    height: 40px !important;
+    padding: 6px 10px !important;
+    gap: 10px !important;
+    z-index: 30 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: opacity .16s ease !important;
+  }
+  .result-card #pdf-progress-container.visible,
+  .result-card .progress-container.visible {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .result-card .progress-shell { height: 8px !important; }
+  .result-card .progress-bar { height: 100% !important; transition: width .32s ease !important; }
+  .result-card .progress-num { min-width: 44px !important; font-size: 13px !important; color: #0092ff !important; text-align: right !important; }
+  #download-progress { height: 8px !important; }
+}
+/* garante espaço reservado no card e força prioridade em mobile */
+.result-card {
+  position: relative !important;
+  padding-bottom: 56px !important; /* valor seguro; ajuste para caber seus botões */
+  box-sizing: border-box !important;
+}
+
+/* progress interno permanece absoluto e fora do fluxo */
+.result-card #pdf-progress-container,
+.result-card .progress-container {
+  position: absolute !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  height: 40px !important;
+  padding: 6px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: opacity .18s ease !important;
+}
+
+/* mostrar apenas com .visible */
+.result-card #pdf-progress-container.visible,
+.result-card .progress-container.visible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* garante a wrapper de download também não altere o layout */
+#download-progress {
+  height: 8px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+#download-progress.visible { opacity: 1 !important; visibility: visible !important; }
