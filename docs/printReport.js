@@ -98,7 +98,7 @@
     return `
 :root{ --accent:#0b63d6; --muted:#6b7785; --card-bg:#ffffff; --page-bg:#f7f9fb; --label-bg:#f1f6fb; --pill-ok:#e6f4ea; --pill-mid:#fff5ea; --pill-low:#fdecea; }
 html,body{margin:0;padding:0;background:var(--page-bg);font-family:Inter, "Helvetica Neue", Arial, sans-serif;color:#091216;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-@page{size:A4;margin:12mm;}
+@page{size:A4;margin:8mm;}
 .pdf-wrap{width:794px;max-width:100%;margin:16px auto;padding:16px 18px 28px;box-sizing:border-box;}
 .report-header{margin-bottom:12px;}
 .report-title{font-size:20px;font-weight:800;color:#091216;margin-bottom:4px;}
@@ -122,16 +122,7 @@ html,body{margin:0;padding:0;background:var(--page-bg);font-family:Inter, "Helve
 .pdf-section-divider{border-top:2px solid rgba(0,0,0,0.08);margin:8px 0 20px;}
 
   /* Footer fixado e sem quebra */
-        .report-footer {
-          margin-top: 12px;
-          border-top: 1px solid rgba(6,18,28,0.06);
-          padding-top: 8px;
-          color: var(--muted);
-          font-size: 12px;
-          text-align: right;
-          page-break-inside: avoid;
-          break-inside: avoid;
-        }
+.report-footer {margin-top: 12px;border-top: 1px solid rgba(6,18,28,0.06);padding-top: 8px;color: var(--muted);font-size: 12px;text-align: right;page-break-inside: avoid;break-inside: avoid;}
 
         .footer-cluster { page-break-inside: avoid; break-inside: avoid; }
 

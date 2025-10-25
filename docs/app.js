@@ -166,54 +166,49 @@ function renderInterpretation(percent, total, max) {
   let incentive = '';
 
   if (percent >= 90) {
-    header = 'Excelente — sua produção visual está em nível de referência.';
+    header = 'Excelente — seu negócio está bem estruturado.';
     actions = [
-      'Invista em conteúdo premium: editoriais, vídeos curtos e fotografia estilizada.',
-      'Documente playbooks e presets para replicar a qualidade em escala.',
-      'Monitore métricas por criativo e aloque orçamento para o que entrega maior ROAS.'
+      'Você domina produto, público, propósito, processos e comunicação; isso facilita convencer clientes e repetir vendas.',
+      'Documente em 1 página: benefícios-chave (Grupo A), cliente ideal (B), processo básico (D) e uma oferta para fidelizar (E).'
     ];
-    incentive = 'Parabéns — mantenha a rotina de testes e transforme ganhos em vantagem competitiva.';
+    incentive = 'Ótimo trabalho — mantenha o hábito de registrar aprendizados e escalar o que já funciona.';
   } else if (percent >= 80) {
-    header = 'Muito bom — imagens sólidas; foco em otimização contínua.';
+    header = 'Muito bom — leve ajuste e escala.';
     actions = [
-      'Planeje experimentos de alto impacto (mini‑campanhas A/B de thumbnails e criativos).',
-      'Automatize presets e templates para reduzir variação entre peças.',
-      'Analise CTR e conversão por criativo para priorizar investimentos.'
+      'Fundamentos sólidos: produto claro e público definido; falta sistematizar testes e retenção.',
+      'Escolha 1 hipótese (ex.: qual benefício vende mais) e teste duas mensagens por 2 semanas; registre qual público responde (B, E).'
     ];
-    incentive = 'Você está perto da excelência — pequenas melhorias estrategicamente aplicadas trarão grandes resultados.';
+    incentive = 'Pequenas melhorias consistentes costumam gerar ganhos rápidos.';
   } else if (percent >= 60) {
-    header = 'Bom — boa base, vale escalar e padronizar processos.';
+    header = 'Bom — base com espaço para padronizar.';
     actions = [
-      'Crie templates e presets para garantir consistência entre produtos e posts.',
-      'Reaproveite variações vencedoras em anúncios e publique testes controlados.',
-      'Invista em otimização técnica: compressão adequada e imagens com zoom de alta resolução.'
+      'Você conhece partes do negócio (provavelmente O QUE e COMO), mas precisa validar público e organizar processos.',
+      'Faça 3 entrevistas rápidas com clientes (por que compraram, onde te acharam) e ajuste a descrição do produto com esses motivos (A, B).'
     ];
-    incentive = 'Você tem tração — priorize processos e testes que ampliem resultados sem aumentar muito custo.';
+    incentive = 'Organize processos simples e comece a medir resultados semanalmente.';
   } else if (percent >= 40) {
-    header = 'Regular — base existente, mas pontos importantes precisam atenção.';
+    header = 'Regular — prioridades pouco claras.';
     actions = [
-      'Refaça imagens de maior prioridade: iluminação, ângulos e close‑ups que respondam dúvidas.',
-      'Otimize miniaturas e thumbnails; execute 1 teste A/B de thumbnail por produto.',
-      'Garanta que variações de cor/tamanho estejam fotografadas de forma padronizada.'
+      'Existem acertos isolados, mas falta ligar benefício do produto ao cliente certo e rotinas confiáveis.',
+      'Escolha 3 produtos/serviços prioritários e, para cada um, escreva 1 frase com o benefício principal e para quem é (A + B).'
     ];
-    incentive = 'Comece com 1 ou 2 mudanças por semana; ganhos rápidos em iluminação e thumbnails costumam melhorar conversão visível.';
+    incentive = 'Faça 1–2 melhorias por semana; comece por deixar a mensagem clara e o atendimento confiável.';
   } else if (percent >= 20) {
-    header = 'Em início de melhoria — há boas intenções, falta consistência.';
+    header = 'Começando — foco e rotina essenciais.';
     actions = [
-      'Escolha 3 produtos prioritários e refaça suas fotos (fundo neutro, modelo/uso, close).',
-      'Padronize tratamento de cor e crie uma checklist de publicação.',
-      'Valide com clientes quais detalhes mais influenciam a compra e direcione produção para esses pontos.'
+      'Há intenção, mas falta foco: defina claramente o que você vende, para quem e como cobrar.',
+      'Em uma folha, responda: 1) qual problema resolve (A), 2) quem é o cliente (B), 3) custo mínimo e preço sugerido (D + E).'
     ];
-    incentive = 'Pequenas iterações consistentes trazem resultados rápidos — foque em processos repetíveis.';
+    incentive = 'Pequenas ações repetidas constroem confiança; comece por público e preço corretos.';
   } else {
-    header = 'Precisa melhorar — reconstrução recomendada para ver impacto real.';
+    header = 'Recomeço nos fundamentos.';
     actions = [
-      'Revise iluminação e capture múltiplos ângulos (estúdio + lifestyle).',
-      'Inclua close‑ups com escala (medidas/modelo) e imagens que respondam dúvidas sem ler a descrição.',
-      'Padronize fundo, enquadramento e crie 1 sessão fotográfica por SKU prioritário.'
+      'É necessário voltar ao básico: entender benefício real do produto e provar para algumas pessoas antes de escalar.',
+      'Valide com 5 pessoas: mostre o produto, explique o benefício (A) e pergunte se comprariam e por quanto; ajuste preço e mensagem conforme respostas (E, B).'
     ];
-    incentive = 'Comece pelo básico: corrija 1 problema crítico esta semana e acompanhe a diferença na confiança do cliente.';
+    incentive = 'Comece esta semana com um teste rápido: benefício claro, preço justo e feedback real.';
   }
+
 
   const actionsHtml = actions.map(a => `<li>${a}</li>`).join('');
   const html = `
